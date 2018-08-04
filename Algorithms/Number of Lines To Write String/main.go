@@ -14,7 +14,6 @@ func numberOfLines(widths []int, S string) []int {
 	lastLine := 0
 	for i:=0; i<len(S); i++ {
 		lineSum += widths[S[i]-'a']
-		fmt.Println(lineSum)
 		if lineSum < 100 {
 			lastLine = lineSum
 			continue
