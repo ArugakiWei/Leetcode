@@ -10,7 +10,7 @@ func main() {
 
 func judgeCircle(moves string) bool {
 
-	if len(moves) % 2 != 0 {
+	if len(moves)%2 != 0 {
 		return false
 	}
 	u, d, l, r := 0, 0, 0, 0

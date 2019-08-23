@@ -11,17 +11,17 @@ func countBinarySubstrings(s string) int {
 		if s[index-1] != s[index] {
 			if pre < cur {
 				sum += pre
-			}else{
+			} else {
 				sum += cur
 			}
 			pre, cur = cur, 1
-		}else{
+		} else {
 			cur++
 		}
 	}
 	if pre < cur {
 		sum += pre
-	}else{
+	} else {
 		sum += cur
 	}
 	return sum
@@ -41,5 +41,3 @@ func main() {
 	fmt.Println(countBinarySubstrings(e))
 	fmt.Println(countBinarySubstrings(f))
 }
-
-

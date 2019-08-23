@@ -60,12 +60,10 @@ func main() {
 //	return sum
 //}
 
-
-
 func isHappy(n int) bool {
 
 	slow, fast := n, n
-	for  {
+	for {
 		slow = power(slow)
 		fast = power(fast)
 		fast = power(fast)

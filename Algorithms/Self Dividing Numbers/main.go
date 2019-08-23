@@ -4,22 +4,22 @@ import "fmt"
 
 func main() {
 
-	fmt.Println(selfDividingNumbers(1,1000000000))
+	fmt.Println(selfDividingNumbers(1, 1000000000))
 }
 
 func selfDividingNumbers(left int, right int) []int {
 
 	var result []int
 
-	for i := left; i<=right; i++ {
+	for i := left; i <= right; i++ {
 
 		if i <= 9 {
 			result = append(result, i)
-		}else{
+		} else {
 			j := i
 			flag := 0
 			for {
-				x := j%10
+				x := j % 10
 				if x == 0 {
 					flag = 1
 					break
@@ -31,7 +31,7 @@ func selfDividingNumbers(left int, right int) []int {
 				if j/10 < 1 {
 					break
 				}
-				j = j/10
+				j = j / 10
 
 			}
 			if flag == 0 {

@@ -7,7 +7,7 @@ import (
 func findTheDifference(s string, t string) byte {
 	sc := make(map[byte]int, 26)
 	tc := make(map[byte]int, 26)
-	for i := 97 ; i < 123; i++ {
+	for i := 97; i < 123; i++ {
 		sc[byte(i)] = 0
 		tc[byte(i)] = 0
 	}
@@ -18,8 +18,8 @@ func findTheDifference(s string, t string) byte {
 	}
 	tc[t[index]] = tc[t[index]] + 1
 	var res byte
-	for i := 97; i< 123; i++ {
-		if tc[byte(i)] - sc[byte(i)] == 1 {
+	for i := 97; i < 123; i++ {
+		if tc[byte(i)]-sc[byte(i)] == 1 {
 			res = byte(i)
 			break
 		}

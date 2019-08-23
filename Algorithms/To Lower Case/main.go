@@ -14,7 +14,7 @@ func toLowerCase(str string) string {
 	for i, c := range dest {
 		if c >= 'A' && c <= 'Z' {
 			dest[i] = c + 32
-		}else{
+		} else {
 			continue
 		}
 	}

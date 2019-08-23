@@ -4,16 +4,15 @@ import "fmt"
 
 func main() {
 
-	b := []string{"zocd","gjkl","hzqk","hzgq","gjkl"}
+	b := []string{"zocd", "gjkl", "hzqk", "hzgq", "gjkl"}
 	fmt.Println(uniqueMorseRepresentations(b))
 }
 
-
 func uniqueMorseRepresentations(words []string) int {
 
-	foo := []string{".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."}
+	foo := []string{".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."}
 	bar := make(map[byte]string)
-	for i, v := range foo{
+	for i, v := range foo {
 		bar[97+byte(i)] = v
 	}
 	mcode := make(map[string]interface{})
@@ -22,8 +21,7 @@ func uniqueMorseRepresentations(words []string) int {
 		for _, w := range []byte(word) {
 			cur = cur + bar[w]
 		}
-		mcode[cur]=new(interface{})
+		mcode[cur] = new(interface{})
 	}
 	return len(mcode)
 }
-

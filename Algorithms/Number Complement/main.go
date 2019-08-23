@@ -30,10 +30,10 @@ func toBinaryComplementNumber(num int) string {
 		}
 		if num%2 == 0 {
 			binary += "1"
-		}else{
+		} else {
 			binary += "0"
 		}
-		num = num/2
+		num = num / 2
 	}
 	return ""
 }

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"strings"
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 func main() {
@@ -18,9 +18,9 @@ func subdomainVisits(cpdomains []string) []string {
 	for _, str := range cpdomains {
 		timeDomains := strings.Split(str, " ")
 		time, _ := strconv.Atoi(timeDomains[0])
-		for i:=1; i<len(strings.Split(timeDomains[1], "."))+1; i++ {
+		for i := 1; i < len(strings.Split(timeDomains[1], "."))+1; i++ {
 			cur := strings.SplitN(timeDomains[1], ".", i)
-			last := len(cur)-1
+			last := len(cur) - 1
 			sum[cur[last]] += time
 		}
 	}

@@ -1,13 +1,13 @@
 package main
 
 import (
-	"sort"
 	"fmt"
+	"sort"
 )
 
 func main() {
 
-	fmt.Println(arrayPairSum([]int{1,4,3,2}))
+	fmt.Println(arrayPairSum([]int{1, 4, 3, 2}))
 }
 
 func arrayPairSum(nums []int) int {

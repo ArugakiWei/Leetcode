@@ -5,39 +5,36 @@ import (
 )
 
 type LRUCache struct {
-
-	cap		int
-	data	map[int]*Node
-	list	List
+	cap  int
+	data map[int]*Node
+	list List
 }
 
 type Node struct {
+	key   int
+	value int
 
-	key 	int
-	value 	int
-
-	pre 	*Node
-	next	*Node
+	pre  *Node
+	next *Node
 }
 
 func NewNode(key, value int) *Node {
 
 	return &Node{
-		key: 	key,
-		value: 	value,
+		key:   key,
+		value: value,
 	}
 }
 
 type List struct {
-
-	start	*Node
-	end		*Node
+	start *Node
+	end   *Node
 }
 
 func NewList() List {
 
 	start := NewNode(-1, -1)
-	end	  := NewNode(-2, -2)
+	end := NewNode(-2, -2)
 
 	start.pre = nil
 	end.next = nil
@@ -45,8 +42,8 @@ func NewList() List {
 	end.pre = start
 
 	return List{
-		start:	start,
-		end:	end,
+		start: start,
+		end:   end,
 	}
 }
 
@@ -83,9 +80,9 @@ func (l List) movetoStart(node *Node) *Node {
 func Constructor(capacity int) LRUCache {
 
 	return LRUCache{
-		cap:		capacity,
-		data:		make(map[int]*Node),
-		list:		NewList(),
+		cap:  capacity,
+		data: make(map[int]*Node),
+		list: NewList(),
 	}
 }
 
@@ -99,15 +96,14 @@ func (this *LRUCache) Get(key int) int {
 	return -1
 }
 
-
-func (this *LRUCache) Put(key int, value int)  {
+func (this *LRUCache) Put(key int, value int) {
 
 	if node, ok := this.data[key]; ok {
 		node.value = value
 		newNode := this.list.movetoStart(node)
 		this.data[key] = newNode
-	}else{
-		if len(this.data) + 1 > this.cap {
+	} else {
+		if len(this.data)+1 > this.cap {
 			node := this.list.pop()
 			delete(this.data, node.key)
 		}
@@ -122,25 +118,25 @@ func main() {
 
 	cache := Constructor(5)
 
-	cache.Put(1, 1);
+	cache.Put(1, 1)
 	fmtlist(cache.list)
 
 	fmt.Println(cache.Get(1))
 	fmtlist(cache.list)
 
-	cache.Put(1, 3);
+	cache.Put(1, 3)
 	fmtlist(cache.list)
 
 	fmt.Println(cache.Get(1))
 	fmtlist(cache.list)
 
-	cache.Put(1, 4);
+	cache.Put(1, 4)
 	fmtlist(cache.list)
 
 	fmt.Println(cache.Get(1))
 	fmtlist(cache.list)
 
-	cache.Put(1, 5);
+	cache.Put(1, 5)
 	fmtlist(cache.list)
 
 	fmt.Println(cache.Get(1))
@@ -176,15 +172,14 @@ func main() {
 	//}
 }
 
-
 func fmtlist(list List) {
 	node := list.start
 	for {
 		if node.next == nil {
-			fmt.Printf("{%d:%d}" , node.key, node.value)
+			fmt.Printf("{%d:%d}", node.key, node.value)
 			break
 		}
-		fmt.Printf("{%d:%d}<-->" , node.key, node.value)
+		fmt.Printf("{%d:%d}<-->", node.key, node.value)
 		node = node.next
 	}
 	fmt.Println()

@@ -1,10 +1,8 @@
 package main
 
-
 type TreeNode struct {
-
-	Val int
-	Left *TreeNode
+	Val   int
+	Left  *TreeNode
 	Right *TreeNode
 }
 
