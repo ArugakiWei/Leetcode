@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 func main() {
@@ -39,7 +38,6 @@ func lengthOfLongestSubstring(s string) int {
 }
 */
 
-
 /*
 // Sliding Window
 func lengthOfLongestSubstring(s string) int {
@@ -61,7 +59,7 @@ func lengthOfLongestSubstring(s string) int {
 }
 */
 
-// Sliding Window Optimized
+/*
 func lengthOfLongestSubstring(s string) int {
 	set := make(map[uint8]bool)
 	ans, i, j := 0, 0, 0
@@ -78,4 +76,33 @@ func lengthOfLongestSubstring(s string) int {
 	}
 
 	return ans
+}
+*/
+
+func lengthOfLongestSubstring(s string) int {
+	window := make(map[byte]int)
+
+	left, right, maxLen := 0, 0, 0
+	for right < len(s) {
+		rightChar := []byte(s)[right]
+		window[rightChar]++
+		right++
+
+		for window[rightChar] > 1 {
+			leftChar := []byte(s)[left]
+			window[leftChar]--
+			left++
+		}
+
+		maxLen = max(maxLen, right-left)
+	}
+
+	return maxLen
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
