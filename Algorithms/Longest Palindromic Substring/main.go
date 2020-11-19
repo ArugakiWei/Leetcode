@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strconv"
-	"strings"
 )
 
 func main() {
@@ -11,46 +9,72 @@ func main() {
 	fmt.Println(longestPalindrome("cbbd"))
 	fmt.Println(longestPalindrome("bbbbb"))
 	fmt.Println(longestPalindrome("abcda"))
+	fmt.Println(longestPalindrome("aacabdkacaa"))
 }
 
-func longestPalindrome(s string) string {
-	if len(s) == 0 || len(s) == 1{
-		return s
+func longestPalindrome1(s string) string {
+	// s[i..j] 中最长回文子串的长度
+	dp := make([][]int, len(s))
+	for i, _ := range dp {
+		dp[i] = make([]int, len(s))
+		dp[i][i] = 1
 	}
+	dp[0][0] = 0
 
-	m := make(map[string]int)
-	for i:=0; i<len(s)-1; i++ {
-		for j:=i+1; j<len(s); j++ {
-			if s[j] == s[i] {
-				ri, ti := i, i+1
-				rj, tj := j, j-1
-				var flag bool
-				for ti < tj {
-					if s[ti] != s[tj] {
-						flag = true
-						break
+	ss := []byte(s)
+	res, start, end := 0, 0, 0
+	for j := 1; j < len(s); j++ {
+		for i := 0; i < j; i++ {
+			// 如果头尾相等
+			if ss[i] == ss[j] {
+				// 如果去掉头尾仍是回文串
+				if dp[i+1][j-1] == j-i-1 {
+					dp[i][j] = max(dp[i][j], dp[i+1][j-1]+2)
+
+					if dp[i][j] > res {
+						res = dp[i][j]
+						start = i
+						end = j
 					}
-					ti++
-					tj--
-				}
-				if !flag {
-					m[fmt.Sprintf("%d-%d", ri, rj)] = rj-ri
 				}
 			}
 		}
 	}
 
-	var max int
-	var start, end string
-	for k, v := range m {
-		if v > max {
-			max = v
-			start = strings.Split(k, "-")[0]
-			end = strings.Split(k, "-")[1]
-		}
+	return string(ss[start : end+1])
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func longestPalindrome(s string) string {
+	if len(s) < 2 {
+		return s
 	}
 
-	i, _ := strconv.ParseInt(start, 10, 64)
-	j, _ := strconv.ParseInt(end, 10, 64)
-	return s[i:j+1]
+	var res string
+	for i, _ := range s {
+		odd := palindrome(s, i, i)
+		even := palindrome(s, i, i+1)
+
+		if len(even) > len(res) {
+			res = even
+		}
+		if len(odd) > len(res) {
+			res = odd
+		}
+	}
+	return res
+}
+
+func palindrome(s string, left, right int) string {
+	for left >= 0 && right < len(s) && s[left] == s[right] {
+		left--
+		right++
+	}
+	return s[left+1 : right]
 }
