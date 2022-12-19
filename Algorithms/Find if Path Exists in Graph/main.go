@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 	// fmt.Println(validPath(3, [][]int{{1, 0}, {1, 2}, {2, 0}}, 0, 2))
 	// fmt.Println(validPath(6, [][]int{{0, 1}, {0, 2}, {3, 5}, {5, 4}, {4, 3}}, 0, 5))
-	fmt.Println(validPath(10, [][]int{{0, 7}, {0, 8}, {6, 1}, {2, 0}, {0, 4}, {5, 8}, {4, 7}, {1, 3}, {3, 5}, {6, 5}}, 7, 5))
+	fmt.Println(validPath2(10, [][]int{{0, 7}, {0, 8}, {6, 1}, {2, 0}, {0, 4}, {5, 8}, {4, 7}, {1, 3}, {3, 5}, {6, 5}}, 7, 5))
 }
 
 func validPath1(n int, edges [][]int, source int, destination int) bool {
