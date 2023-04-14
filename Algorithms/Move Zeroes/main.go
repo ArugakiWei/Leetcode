@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 func main() {
 
 	a := []int{0, 1, 0, 3, 12}
@@ -14,7 +10,7 @@ func main() {
 	moveZeroes(c)
 }
 
-func moveZeroes(nums []int) {
+func moveZeroes1(nums []int) {
 
 	j := 0
 	for i := 0; j < len(nums); i++ {
@@ -25,5 +21,18 @@ func moveZeroes(nums []int) {
 			i--
 		}
 	}
-	fmt.Println(nums)
+}
+
+func moveZeroes(nums []int) {
+	slow, fast := 0, 0
+	for fast < len(nums) {
+		if nums[fast] != 0 {
+			nums[slow] = nums[fast]
+			slow++
+		}
+		fast++
+	}
+	for ; slow < len(nums); slow++ {
+		nums[slow] = 0
+	}
 }
