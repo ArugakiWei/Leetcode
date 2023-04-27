@@ -47,7 +47,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
-func reverseBetween(head *ListNode, m int, n int) *ListNode {
+func reverseBetween1(head *ListNode, m int, n int) *ListNode {
 	var cur, pre, rHead, rEnd *ListNode
 
 	i, rH, rE := 1, 0, 0
@@ -96,4 +96,40 @@ func reverseBetween(head *ListNode, m int, n int) *ListNode {
 		return cur
 	}
 	return head
+}
+
+func reverseBetween(head *ListNode, left int, right int) *ListNode {
+	dummy := &ListNode{
+		Val:  -1,
+		Next: head,
+	}
+	index, l, r, preL := 1, dummy.Next, dummy.Next, dummy
+	var afterR *ListNode
+	cur := head
+	for cur != nil {
+		if index == left-1 {
+			preL = cur
+		}
+		if index == left {
+			l = cur
+		}
+		if index == right {
+			r = cur
+		}
+		if index == right+1 {
+			afterR = cur
+		}
+		cur = cur.Next
+		index++
+	}
+	c, p := l, preL
+	for c != afterR {
+		t := c.Next
+		c.Next = p
+		p = c
+		c = t
+	}
+	preL.Next = r
+	l.Next = afterR
+	return dummy.Next
 }
